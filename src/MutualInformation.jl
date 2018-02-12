@@ -1,5 +1,6 @@
 module MutualInformation
 
-# package code goes here
+include("entropy.jl")
+include("mutual_information.jl")
 
-end # module
+end
