@@ -57,14 +57,14 @@ Estimate the entropy of an array using a naive (frequencies-based),
 Chao-Shen, or shrinkage estimator. Chao-Shen and shrinkage estimators reduce
 the bias for small samples and a large number of classes.
 """
-function entropy(data::AbstractVector{T}; method=:Naive) where T <: Real
+function estimate_entropy(data::AbstractVector{T}; method=:Naive) where T <: Real
   count_values = values(countmap(data))
   freqs = FrequencyWeights(collect(count_values))
   return entropy(freqs; method=method)
 end
 
 
-function joint_entropy(x::AbstractVector{T}, y::AbstractVector{T};
+function estimate_joint_entropy(x::AbstractVector{T}, y::AbstractVector{T};
                        method=:Naive) where T <: Real
 
   @assert length(x) == length(y) "Vectors must be the same length"
