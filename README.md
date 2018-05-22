@@ -1,9 +1,7 @@
 # Discreet
 
 [![Build Status](https://travis-ci.org/cynddl/Discreet.jl.svg?branch=master)](https://travis-ci.org/cynddl/Discreet.jl)
-
 [![Coverage Status](https://coveralls.io/repos/cynddl/Discreet.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/cynddl/Discreet.jl?branch=master)
-
 [![codecov.io](http://codecov.io/github/cynddl/Discreet.jl/coverage.svg?branch=master)](http://codecov.io/github/cynddl/Discreet.jl?branch=master)
 
 Discreet is a small opinionated toolbox to estimate entropy and mutual information from discrete samples. It contains methods to adjust results and correct over- or under-estimations.
@@ -36,4 +34,20 @@ using Discreet
 
 data = ["tomato", "apple", "apple", "banana", "tomato"]
 estimate_entropy(data)  # == entropy(FrequencyWeights([2, 2, 1]))
+```
+
+## Estimate mutual information
+
+Discrete provides similar routines to estimate mutual information.
+
+```julia
+using Discreet
+
+labels_a = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3]
+labels_b = [1, 1, 1, 1, 2, 1, 2, 2, 2, 2, 3, 1, 3, 3, 3, 2, 2]
+mutual_information(labels_a, labels_b)  # Naive method: ≈ 0.410
+
+mutual_information(labels_a, labels_b; method=:CS)  # Chao-Shen correction: ≈ 0.148
+
+mutual_information(labels_a, labels_b; normalize=true)  # Normalized score (between 0 and 1): ≈ 0.382
 ```
