@@ -1,5 +1,4 @@
 import StatsBase: entropy
-
 entropy(probs::ProbabilityWeights) = -sum(x->(x * log(x)), probs[probs .> 0])
 
 
@@ -57,20 +56,17 @@ Estimate the entropy of an array using a naive (frequencies-based),
 Chao-Shen, or shrinkage estimator. Chao-Shen and shrinkage estimators reduce
 the bias for small samples and a large number of classes.
 """
-function estimate_entropy(data::AbstractVector{T}; method=:Naive) where T <: Real
+function estimate_entropy(data::AbstractVector; method::Symbol=:Naive)
   count_values = values(countmap(data))
   freqs = FrequencyWeights(collect(count_values))
   return entropy(freqs; method=method)
 end
 
 
-function estimate_joint_entropy(x::AbstractVector{T}, y::AbstractVector{T};
-                       method=:Naive) where T <: Real
-
+function estimate_joint_entropy(x::AbstractVector, y::AbstractVector; method::Symbol=:Naive)
   @assert length(x) == length(y) "Vectors must be the same length"
-  N = length(x)
 
-  count_values = values(countmap([hash(y[i], hash(x[i])) for i=1:N]))
+  count_values = values(countmap([hash(y[i], hash(x[i])) for i=1:length(x)]))
   freqs = FrequencyWeights(collect(count_values))
   entropy(freqs; method=method)
 end
