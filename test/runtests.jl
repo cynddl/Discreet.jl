@@ -1,4 +1,4 @@
-using MutualInformation
+using Discreet
 import StatsBase: FrequencyWeights, ProbabilityWeights
 using Base.Test
 
@@ -7,6 +7,7 @@ using Base.Test
 @test 0 == entropy([1,1,1,1,1,1])
 @test -log(1/6) ≈ entropy(FrequencyWeights([1,1,1,1,1,1]))
 @test 0 == entropy(FrequencyWeights([6]))
+
 
 # From library(entropy) in R
 @test 3.840549310406 ≈ entropy(FrequencyWeights([1,1,1,1,1,1]); method=:CS)

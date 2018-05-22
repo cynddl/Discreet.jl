@@ -1,4 +1,4 @@
-module MutualInformation
+module Discreet
 
 using StatsBase
 
