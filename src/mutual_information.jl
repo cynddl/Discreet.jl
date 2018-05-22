@@ -9,7 +9,7 @@ end
 
 
 function mutual_information(
-    x::AbstractVector{<:Number}, y::AbstractVector{<:Number}, ex::T, ey::T; method=:Naive, adjusted=false, normalize=false) where T<:Number
+    x::AbstractVector, y::AbstractVector, ex::T, ey::T; method=:Naive, adjusted=false, normalize=false) where T<:Number
 
     # Compute the joint entropy without adjustment nor normalization
     ee = estimate_joint_entropy(x, y; method=method)
@@ -26,7 +26,7 @@ function mutual_information(
 end
 
 function mutual_information(
-    x::AbstractVector{<:Number}, y::AbstractVector{<:Number};
+    x::AbstractVector, y::AbstractVector;
     method=:Naive, adjusted=false, normalize=false)
 
     ex = estimate_entropy(x)
@@ -35,7 +35,7 @@ function mutual_information(
         x, y, ex, ey; method=method, adjusted=adjusted, normalize=normalize)
 end
 
-function mutual_information(data::AbstractMatrix{<:Number}; method::Symbol=:Naive, adjusted::Bool=false, normalize::Bool=false)
+function mutual_information(data::AbstractMatrix; method::Symbol=:Naive, adjusted::Bool=false, normalize::Bool=false)
     M = size(data, 2)
     mi_sym = Array{Float64}(M, M)
 

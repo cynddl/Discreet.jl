@@ -28,3 +28,20 @@ const sample = [:a, :b, :c, :d, :e, :f]
 ## Joint entropy
 @test log(6) ≈ estimate_joint_entropy(sample, sample)
 @test 3.840549310406 ≈ estimate_joint_entropy(sample, sample; method=:CS)
+
+
+# Tests for mutual information routines
+
+const labels_a = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3]
+const labels_b = [1, 1, 1, 1, 2, 1, 2, 2, 2, 2, 3, 1, 3, 3, 3, 2, 2]
+
+mi = mutual_information(labels_a, labels_b)
+@test 0.41022 ≈ mi atol=1e-5
+
+e_a = estimate_entropy(labels_a)
+e_b = estimate_entropy(labels_b)
+mi_normalized = mutual_information(labels_a, labels_b; normalize=true)
+@test mi / min(e_a, e_b) ≈ mi_normalized
+
+data = hcat(sample, sample, sample)
+@test log(6) * ones(3, 3) ≈ mutual_information(data)
