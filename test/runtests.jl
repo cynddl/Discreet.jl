@@ -45,3 +45,20 @@ mi_normalized = mutual_information(labels_a, labels_b; normalize=true)
 
 data = hcat(sample, sample, sample)
 @test log(6) * ones(3, 3) ≈ mutual_information(data)
+
+
+# Tests for contingency tables
+
+d = rand(10, 10)
+table = d / sum(d)
+mi_1 = mutual_information_contingency(table)
+e_a, e_b =  entropy(sum(table, 1)), entropy(sum(table, 2))
+mi_2 = e_a + e_b - entropy(table[:])
+@test mi_1 ≈ mi_2
+
+## Normalized MI
+mi_norm = mutual_information_contingency(table; normalize=true)
+@test mi_norm ≈ mi_1 / min(e_a, e_b)
+
+## Table with no association
+@test 0 ≈ mutual_information_contingency(ones(20, 5) / 100) atol=1e-10
