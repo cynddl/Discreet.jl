@@ -43,11 +43,14 @@ function entropy_shrinkage(counts::FrequencyWeights)
     t_k = 1 / length(θ_ML)
 
     # Regularization parameter
-    λ = (1 - sum(θ_ML .^ 2)) / ((n - 1) * sum((θ_ML - t_k) .^2))
+    den = (n - 1) * sum((θ_ML - t_k) .^2)
 
-    isinf(λ) ?
-      entropy(ProbabilityWeights(θ_ML)) :
-      entropy(ProbabilityWeights(λ * t_k + (1 - λ) * θ_ML))
+    if den < 1e-10
+      return entropy(ProbabilityWeights(θ_ML))
+    else
+      λ = (1 - sum(θ_ML .^ 2)) / den
+      return entropy(ProbabilityWeights(λ * t_k + (1 - λ) * θ_ML))
+    end
 end
 
 
