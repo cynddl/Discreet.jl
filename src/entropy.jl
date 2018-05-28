@@ -42,12 +42,11 @@ function entropy_shrinkage(counts::FrequencyWeights)
     # Uniform distribution
     t_k = 1 / length(θ_ML)
 
-    # Regularization parameter
     den = (n - 1) * sum((θ_ML - t_k) .^2)
-
     if den < 1e-10
       return entropy(ProbabilityWeights(θ_ML))
     else
+      # Regularization parameter
       λ = (1 - sum(θ_ML .^ 2)) / den
       return entropy(ProbabilityWeights(λ * t_k + (1 - λ) * θ_ML))
     end
@@ -69,7 +68,7 @@ end
 function estimate_joint_entropy(x::AbstractVector, y::AbstractVector; method::Symbol=:Naive)
   @assert length(x) == length(y) "Vectors must be the same length"
 
-  count_values = values(countmap([hash(y[i], hash(x[i])) for i=1:length(x)]))
-  freqs = FrequencyWeights(collect(count_values))
+  count = countmap([hash(yᵢ, hash(xᵢ)) for (xᵢ, yᵢ) ∈ zip(x, y)])
+  freqs = FrequencyWeights(collect(values(count)))
   entropy(freqs; method=method)
 end
