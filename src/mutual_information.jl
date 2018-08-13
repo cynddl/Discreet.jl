@@ -1,7 +1,7 @@
-function mutual_information_contingency(probs::AbstractMatrix{<:Number}; normalize::Bool=false)
+function mutual_information_contingency(probs::AbstractMatrix{Float64}; normalize::Bool=false)
     ee = entropy(ProbabilityWeights(probs[:]))
-    ex = entropy(ProbabilityWeights(sum(probs, 1)[:]))
-    ey = entropy(ProbabilityWeights(sum(probs, 2)[:]))
+    @compat ex = entropy(ProbabilityWeights(sum(probs, dims=1)[:]))
+    @compat ey = entropy(ProbabilityWeights(sum(probs, dims=2)[:]))
 
     mi = ex + ey - ee
     return normalize ? min(mi / min(ex, ey), 1.) : mi
@@ -9,7 +9,7 @@ end
 
 
 function mutual_information(
-    x::AbstractVector, y::AbstractVector, ex::T, ey::T; method=:Naive, adjusted=false, normalize=false) where T<:Number
+    x::AbstractVector, y::AbstractVector, ex::Float64, ey::Float64; method=:Naive, adjusted=false, normalize=false)
 
     # Compute the joint entropy without adjustment nor normalization
     ee = estimate_joint_entropy(x, y; method=method)
@@ -37,7 +37,7 @@ end
 
 function mutual_information(data::AbstractMatrix; method::Symbol=:Naive, adjusted::Bool=false, normalize::Bool=false)
     M = size(data, 2)
-    mi_sym = Array{Float64}(M, M)
+    mi_sym = Array{Float64, 2}(undef, M, M)
 
     for i =1:M
         mi_sym[i,i] = estimate_entropy(@view data[:,i]; method=method)

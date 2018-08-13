@@ -1,6 +1,7 @@
 using Discreet
 import StatsBase: FrequencyWeights, ProbabilityWeights
-using Base.Test
+using Compat, Compat.Test
+import Compat.sum
 
 freqs_uniform = FrequencyWeights([1, 1, 1, 1, 1, 1])
 probs_uniform = ProbabilityWeights([.5, .5])
@@ -50,7 +51,7 @@ end
     d = rand(10, 10)
     table = d / sum(d)
     mi_1 = mutual_information_contingency(table)
-    e_a, e_b =  entropy(sum(table, 1)), entropy(sum(table, 2))
+    @compat e_a, e_b =  entropy(sum(table, dims=1)), entropy(sum(table, dims=2))
     mi_2 = e_a + e_b - entropy(table[:])
     @test mi_1 ≈ mi_2
 

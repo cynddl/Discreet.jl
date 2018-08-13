@@ -25,7 +25,7 @@ function entropy_cs(counts::FrequencyWeights)
   # Estimate coverage
   C = (1 - f1 / n)
   p_a = C * θ_ML
-  l_a = (1 - (1 - p_a) .^ n)
+  l_a = (1 .- (1 .- p_a) .^ n)
 
   return - sum(p_a .* log.(p_a) ./ l_a)
 end
@@ -42,13 +42,13 @@ function entropy_shrinkage(counts::FrequencyWeights)
     # Uniform distribution
     t_k = 1 / length(θ_ML)
 
-    den = (n - 1) * sum((θ_ML - t_k) .^2)
+    den = (n - 1) * sum((θ_ML .- t_k) .^2)
     if den < 1e-10
       return entropy(ProbabilityWeights(θ_ML))
     else
       # Regularization parameter
       λ = (1 - sum(θ_ML .^ 2)) / den
-      return entropy(ProbabilityWeights(λ * t_k + (1 - λ) * θ_ML))
+      return entropy(ProbabilityWeights(λ * t_k .+ (1 - λ) * θ_ML))
     end
 end
 
