@@ -1,7 +1,7 @@
 function mutual_information_contingency(probs::AbstractMatrix{Float64}; normalize::Bool=false)
     ee = entropy(ProbabilityWeights(probs[:]))
-    @compat ex = entropy(ProbabilityWeights(sum(probs, dims=1)[:]))
-    @compat ey = entropy(ProbabilityWeights(sum(probs, dims=2)[:]))
+    ex = entropy(ProbabilityWeights(sum(probs, dims=1)[:]))
+    ey = entropy(ProbabilityWeights(sum(probs, dims=2)[:]))
 
     mi = ex + ey - ee
     return normalize ? min(mi / min(ex, ey), 1.) : mi

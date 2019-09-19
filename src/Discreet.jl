@@ -3,8 +3,7 @@ __precompile__(true)
 module Discreet
 
 using StatsBase
-using Compat
-import Compat.sum
+using Random
 
 export
     entropy,
