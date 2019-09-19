@@ -6,8 +6,6 @@
 
 Discreet is a small opinionated toolbox to estimate entropy and mutual information from discrete samples. It contains methods to adjust results and correct over- or under-estimations.
 
-The code here should work on Julia 0.6. It has minimal unit tests and has received little testing in the wild.g
-
 ## Estimating entropy
 
 Discreet uses StatsBase's FrequencyWeights and ProbabilityWeights types.

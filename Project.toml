@@ -1,5 +1,5 @@
 name = "Discreet"
-uuid = "6d8d243e-dacd-11e9-8a34-2a2ae2dbcce4"
+uuid = "c2843242-4f35-58a6-a2a0-7e7527607317"
 version = "0.3.0"
 
 [deps]
@@ -8,4 +8,4 @@ Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 
 [compat]
-julia = "0.7,1"
+julia = "≥ 0.7.0"
