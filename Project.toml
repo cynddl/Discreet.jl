@@ -1,6 +1,6 @@
 name = "Discreet"
 uuid = "c2843242-4f35-58a6-a2a0-7e7527607317"
-version = "0.3.0"
+version = "0.3.1"
 
 [deps]
 Compat = "34da2185-b29b-5c13-b0c7-acf172513d20"
@@ -10,4 +10,4 @@ StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 [compat]
 julia = "≥ 0.7.0"
 Compat = "≥ 2"
-DataStructures = "≥ 0.17"
+StatsBase = "≥ 0.17"
