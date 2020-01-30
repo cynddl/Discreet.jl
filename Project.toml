@@ -9,3 +9,5 @@ StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 
 [compat]
 julia = "≥ 0.7.0"
+Compat = "≥ 2"
+DataStructures = "≥ 0.17"
