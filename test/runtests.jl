@@ -1,6 +1,8 @@
 using Discreet
 import StatsBase: FrequencyWeights, ProbabilityWeights
-using Compat, Compat.Test
+
+using Test
+using Compat
 import Compat.sum
 
 freqs_uniform = FrequencyWeights([1, 1, 1, 1, 1, 1])

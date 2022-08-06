@@ -1,3 +1,1 @@
-julia 0.7
-Compat
-StatsBase
+julia 1.0

@@ -68,7 +68,7 @@ end
 function estimate_joint_entropy(x::AbstractVector, y::AbstractVector; method::Symbol=:Naive)
   @assert length(x) == length(y) "Vectors must be the same length"
 
-  count = countmap([hash(yᵢ, hash(xᵢ)) for (xᵢ, yᵢ) ∈ zip(x, y)])
+  count = countmap([hash(yᵢ, hash(xᵢ)) for (xᵢ, yᵢ) ∈ zip(x, y)], alg=:dict)
   freqs = FrequencyWeights(collect(values(count)))
   entropy(freqs; method=method)
 end
