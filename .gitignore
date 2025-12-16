@@ -1,3 +1,7 @@
-*.jl.cov
-*.jl.*.cov
-*.jl.mem
+.DS_Store
+*.opf
+*.cov
+*.mem
+Manifest.toml
+docs/Manifest.toml
+examples/Manifest.toml

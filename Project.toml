@@ -1,16 +1,21 @@
 name = "Discreet"
 uuid = "c2843242-4f35-58a6-a2a0-7e7527607317"
 version = "0.3.3"
+authors = ["cynddl"]
+license = "MIT"
+description = "A Julia package for estimating entropy and mutual information from discrete samples with bias correction"
+homepage = "https://github.com/cynddl/Discreet.jl"
+repository = "https://github.com/cynddl/Discreet.jl"
+keywords = ["entropy", "mutual-information", "information-theory", "statistics", "bias-correction"]
+categories = ["Math", "Statistics"]
 
 [deps]
-Compat = "34da2185-b29b-5c13-b0c7-acf172513d20"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 
 [compat]
-Compat = "2, 3, 4"
-StatsBase = "0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.30, 0.31, 0.32, 0.33, 0.34"
-julia = "^1.6"
+StatsBase = "0.33, 0.34"
+julia = "1.9"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
