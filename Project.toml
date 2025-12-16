@@ -1,6 +1,6 @@
 name = "Discreet"
 uuid = "c2843242-4f35-58a6-a2a0-7e7527607317"
-version = "0.3.3"
+version = "1.0.0"
 authors = ["cynddl"]
 license = "MIT"
 description = "A Julia package for estimating entropy and mutual information from discrete samples with bias correction"
